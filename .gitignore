@@ -1,0 +1,20 @@
+# Foundry build artifacts
+broadcast/
+cache/
+out/
+out-safe/
+foundry.lock
+
+# Safe/multisig experiments (not production)
+safe-src/
+safe-scripts/
+safe-tests/
+lib/safe-contracts/
+
+# Environment / secrets
+.env
+.env.*
+node_modules/
+
+# OS
+.DS_Store
