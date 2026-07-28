@@ -1,0 +1,14 @@
+{
+  "name": "@orebot/api",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}
