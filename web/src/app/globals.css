@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dark void base - cyber/terminal aesthetic */
+  --color-background: #0A0B0F;
+  --color-foreground: #e4e4ec;
+  --color-muted: #13131a;
+  --color-muted-foreground: #6b6b7a;
+  --color-border: #1e1e2a;
+
+  /* Cyan electric accent - primary actions, links, highlights */
+  --color-primary: #00E5FF;
+  --color-primary-foreground: #0A0B0F;
+
+  /* Green secondary - success, data, metrics */
+  --color-secondary: #00ff88;
+  --color-secondary-foreground: #0A0B0F;
+
+  /* Amber - warnings, payments, attention */
+  --color-accent: #B14EFF;
+  --color-accent-foreground: #0A0B0F;
+
+  --color-destructive: #ff3d5a;
+  --color-destructive-foreground: #ffffff;
+
+  /* Ring - focus outlines */
+  --color-ring: #00E5FF;
+
+  /* Tight, sharp radii - terminal feel */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+}
+
+*,
+*::before,
+*::after {
+  border-color: var(--color-border);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Terminal glow utilities */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15), 0 0 40px rgba(0, 229, 255, 0.05);
+}
+.glow-green {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15), 0 0 40px rgba(0, 255, 136, 0.05);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+/* Scanline overlay for hero section */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 229, 255, 0.015) 2px,
+    rgba(0, 229, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
