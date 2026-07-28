@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "deployed": {
+    "creditManager": {
+      "address": "0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE",
+      "txHash": "0x8e402cce3c5554b9a895c4f1b77c7063c87f7e7fd5147e146f0bbc9aaa7ebfed",
+      "gasUsed": "837176",
+      "adminTransferTx": "0xca2e93f191d423f88f373bedb2d1618ed3c0d9ffcf4e332907f592de3343e0bc"
+    },
+    "skillRegistry": {
+      "address": "0x807C2CaB504695037Bef875232b769130009877A",
+      "txHash": "0xd28820aaecd3ed1c76f7264cc4f0a34e2ae3e0311378ec931d6bea7a629a92d8",
+      "gasUsed": "1634826",
+      "adminTransferTx": "0xda272a60ede3390fcd92007dd0a014b9307a5b4969dc06a9eb0f9e09b918144e"
+    }
+  },
+  "summary": {
+    "deployer": "0x9ad133aDDba94A95320126d8784d484943130115",
+    "oreToken": "0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD",
+    "treasury": "0x4e26fc6eb05a1cdbd762609fde9958e5b8cc754d",
+    "chain": "Base Mainnet (8453)",
+    "basescanLinks": {
+      "creditManager": "https://basescan.org/address/0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE",
+      "skillRegistry": "https://basescan.org/address/0x807C2CaB504695037Bef875232b769130009877A"
+    }
+  }
+}

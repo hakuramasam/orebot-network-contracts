@@ -38,6 +38,8 @@ User Wallet
 
 ## Deployed Contracts (Base Mainnet, chainId 8453)
 
+### Core Contracts (v1.0)
+
 | Contract | Address |
 |----------|---------|
 | OREToken | [`0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD`](https://basescan.org/address/0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD) |
@@ -47,7 +49,14 @@ User Wallet
 | SignalStaking | [`0x9948378e9088979124184464d145ACF0E217C5a7`](https://basescan.org/address/0x9948378e9088979124184464d145ACF0E217C5a7) |
 | TrendBuybackBurner | [`0x02ae416b83dd3A572d98F78E523b3536127eac2d`](https://basescan.org/address/0x02ae416b83dd3A572d98F78E523b3536127eac2d) |
 
-**New contracts (planned):** CreditManager, SkillRegistry, Treasury (upgraded)
+### v2.0 Contracts
+
+| Contract | Address | Deployed |
+|----------|---------|----------|
+| CreditManager | [`0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE`](https://basescan.org/address/0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE) | 2026-07-28 |
+| SkillRegistry | [`0x807C2CaB504695037Bef875232b769130009877A`](https://basescan.org/address/0x807C2CaB504695037Bef875232b769130009877A) | 2026-07-28 |
+
+**Treasury:** `0x4e26fc6eb05a1cdbd762609fde9958e5b8cc754d` (DEFAULT_ADMIN_ROLE on all contracts)
 
 ---
 
@@ -103,9 +112,14 @@ orebot-network-contracts/
 │   ├── ui/           # Shared UI components
 │   ├── shared/       # Shared utilities
 │   └── types/        # TypeScript type definitions
-├── contracts/        # Solidity smart contracts (Foundry)
-│   ├── src/          # OREToken, Registry, CreditManager, SkillRegistry...
-│   └── test/         # Foundry tests
+├── src/             # Solidity smart contracts (Foundry)
+│   ├── OREToken.sol
+│   ├── OREBOTRegistry.sol
+│   ├── CreditManager.sol
+│   ├── SkillRegistry.sol
+│   └── ...
+├── test/            # Foundry tests
+├── scripts/         # Deployment + compilation scripts
 ├── infra/
 │   ├── docker/
 │   └── scripts/
@@ -125,18 +139,18 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 
 ## Roadmap
 
-| Sprint | Deliverable |
-|--------|-------------|
-| 1 | Repository, CI/CD, Landing, Dashboard, Wallet, Credits |
-| 2 | Credit Engine, TREND/ORE, Deposit, Usage |
-| 3 | AI Gateway, OpenRouter, Claude, GPT, Gemini, DeepSeek |
-| 4 | Base Integration, Wallet, Swap, NFT, Contracts, Treasury |
-| 5 | Marketplace, Skills, Plugins, Agent Registry |
-| 6 | Multi-Agent Runtime (Commander, Developer, Trader, Researcher, Guardian) |
-| 7 | x402 Payments, Agent-to-Agent, Subscriptions, Streaming |
-| 8 | Public Beta |
-| 9 | DAO, Governance, Staking, Treasury |
-| 10 | Mainnet Launch |
+| Sprint | Deliverable | Status |
+|--------|-------------|--------|
+| 1 | Repository, CI/CD, Landing, Dashboard, Wallet, Credits | ✅ Done |
+| 2 | Credit Engine, TREND/ORE, Deposit, Usage | In Progress |
+| 3 | AI Gateway, OpenRouter, Claude, GPT, Gemini, DeepSeek | Planned |
+| 4 | Base Integration, Wallet, Swap, NFT, Contracts, Treasury | Planned |
+| 5 | Marketplace, Skills, Plugins, Agent Registry | Planned |
+| 6 | Multi-Agent Runtime (Commander, Developer, Trader, Researcher, Guardian) | Planned |
+| 7 | x402 Payments, Agent-to-Agent, Subscriptions, Streaming | Planned |
+| 8 | Public Beta | Planned |
+| 9 | DAO, Governance, Staking, Treasury | Planned |
+| 10 | Mainnet Launch | Planned |
 
 ---
 
