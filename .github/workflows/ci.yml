@@ -1,0 +1,71 @@
+# CI/CD Workflow for OREBOT Network
+# 
+# This file needs to be added manually to .github/workflows/ci.yml
+# because the current GitHub token lacks the `workflow` scope.
+# 
+# To enable: Re-authorize the GitHub connector with the `workflow` scope,
+# or paste this file directly in the GitHub web UI.
+
+name: OREBOT Network CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  contracts:
+    name: Foundry Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Build contracts
+        run: forge build
+      - name: Run tests
+        run: forge test -vv
+
+  web:
+    name: Web Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web/
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_THIRDWEB_CLIENT_ID }}
+
+  packages:
+    name: Package Type Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [credit-engine, agent-sdk, types, shared, blockchain, telemetry, skills, ui]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Type check ${{ matrix.package }}
+        run: |
+          cd packages/${{ matrix.package }}
+          if [ -f tsconfig.json ]; then
+            npx tsc --noEmit
+          fi
