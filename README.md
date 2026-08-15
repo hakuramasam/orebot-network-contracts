@@ -13,7 +13,19 @@ OREBOT becomes the App Store for autonomous AI agents on Base.
 ## Token Economy
 
 ```
-User Wallet → TREND → ORE → OREBOT Credits → AI Services
+User Wallet
+    │
+    ▼
+  TREND  (governance / community)
+    │  100 TREND = 1 ORE (governance configurable)
+    ▼
+   ORE   (utility / AI payments)
+    │  1 ORE = 10 OREBOT Credits (governance configurable)
+    ▼
+ OREBOT Credits  (internal AI usage)
+    │
+    ▼
+ AI Services  (OpenRouter, OpenAI, Claude, Gemini, DeepSeek, Mistral)
 ```
 
 | Token | Role |
@@ -26,24 +38,31 @@ User Wallet → TREND → ORE → OREBOT Credits → AI Services
 
 ## Deployed Contracts (Base Mainnet, chainId 8453)
 
+### Core Contracts (v1.0)
+
 | Contract | Address |
 |----------|---------|
-| OREToken | `0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD` |
-| OREBOTRegistry | `0x9ddDaC16f39Ba64d187fee386c4147E7fB0E85A2` |
-| AgentPaymentRouter | `0x2e23e1eE8061d6eAAdC75cE37D8C96D8e16C844e` |
-| OREBOTMarketplace | `0x83358421B952eCe0Fc84529E81A1bC98a1001B7d` |
-| SignalStaking | `0x9948378e9088979124184464d145ACF0E217C5a7` |
-| TrendBuybackBurner | `0x02ae416b83dd3A572d98F78E523b3536127eac2d` |
-| CreditManager | `0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE` |
-| SkillRegistry | `0x807C2CaB504695037Bef875232b769130009877A` |
+| OREToken | [`0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD`](https://basescan.org/address/0x954Fee860f69938E48bdDFC4bb1a85CEfA2edecD) |
+| OREBOTRegistry | [`0x9ddDaC16f39Ba64d187fee386c4147E7fB0E85A2`](https://basescan.org/address/0x9ddDaC16f39Ba64d187fee386c4147E7fB0E85A2) |
+| AgentPaymentRouter | [`0x2e23e1eE8061d6eAAdC75cE37D8C96D8e16C844e`](https://basescan.org/address/0x2e23e1eE8061d6eAAdC75cE37D8C96D8e16C844e) |
+| OREBOTMarketplace | [`0x83358421B952eCe0Fc84529E81A1bC98a1001B7d`](https://basescan.org/address/0x83358421B952eCe0Fc84529E81A1bC98a1001B7d) |
+| SignalStaking | [`0x9948378e9088979124184464d145ACF0E217C5a7`](https://basescan.org/address/0x9948378e9088979124184464d145ACF0E217C5a7) |
+| TrendBuybackBurner | [`0x02ae416b83dd3A572d98F78E523b3536127eac2d`](https://basescan.org/address/0x02ae416b83dd3A572d98F78E523b3536127eac2d) |
 
-**Treasury:** `0x4e26fc6eb05a1cdbd762609fde9958e5b8cc754d`
+### v2.0 Contracts
+
+| Contract | Address | Deployed |
+|----------|---------|----------|
+| CreditManager | [`0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE`](https://basescan.org/address/0x35cDfA7eC43Cb7BCa082354981F2D066109F0beE) | 2026-07-28 |
+| SkillRegistry | [`0x807C2CaB504695037Bef875232b769130009877A`](https://basescan.org/address/0x807C2CaB504695037Bef875232b769130009877A) | 2026-07-28 |
+
+**Treasury:** `0x4e26fc6eb05a1cdbd762609fde9958e5b8cc754d` (DEFAULT_ADMIN_ROLE on all contracts)
 
 ---
 
 ## Agent + API Architecture
 
-OREBOT now separates the agent-facing protocol layer from economic and blockchain settlement:
+OREBOT separates the agent-facing protocol layer from economic and blockchain settlement:
 
 ```text
 AI Mind / Agent
@@ -69,7 +88,19 @@ See [`docs/SCALAR_AGENT.md`](docs/SCALAR_AGENT.md) and [`docs/openapi/orebot-gat
 
 ## OREBOT Agents
 
-Commander · Architect · Developer · Auditor · Researcher · Trader · Creator · Designer · Treasury · Guardian · Learning
+| Agent | Role |
+|-------|------|
+| Commander | Coordinates all AI agents |
+| Architect | System architecture |
+| Developer | Writes software |
+| Auditor | Reviews smart contracts |
+| Researcher | Research and reports |
+| Trader | Trading AI |
+| Creator | Images, NFTs, videos, logos |
+| Designer | UI/UX design |
+| Treasury | Payments, credits, revenue |
+| Guardian | Security, wallet protection, secrets |
+| Learning | Learns from usage, improves routing |
 
 ---
 
@@ -84,6 +115,7 @@ Commander · Architect · Developer · Auditor · Researcher · Trader · Creato
 | Coding | 5–25 |
 | Website | 20–100 |
 | Smart Contract | 20–50 |
+| NFT | 15–30 |
 | Trading | 10–30 |
 | Deployment | 5–15 |
 
@@ -91,23 +123,26 @@ Commander · Architect · Developer · Auditor · Researcher · Trader · Creato
 
 ## Monorepo Structure
 
-```text
+```
 orebot-network-contracts/
 ├── apps/
-│   ├── web/                 # Next.js frontend
-│   ├── api/                 # API application
-│   └── docs/                # Documentation
+│   ├── web/          # Next.js 16 frontend (dashboard, wallet, marketplace)
+│   ├── api/          # API server (auth, credits, AI gateway)
+│   └── docs/         # Documentation site
 ├── packages/
-│   ├── agent-sdk/           # OREBOT agent runtime + Scalar adapters
-│   ├── x402-gateway/        # API keys, credits, x402, Base settlement
-│   ├── credit-engine/       # ORE → Credits conversion and billing
-│   ├── blockchain/          # Contract/RPC helpers
-│   ├── telemetry/           # Monitoring
-│   ├── skills/              # Skill runtime
-│   └── ...
-├── src/                     # Solidity contracts
-├── test/                    # Foundry tests
-├── scripts/                 # Deployment/compile scripts
+│   ├── agent-sdk/    # AI provider routing, agent definitions + Scalar adapters
+│   ├── x402-gateway/ # Agent API keys, credits, x402 + Base settlement
+│   ├── credit-engine/ # ORE→Credits conversion, billing
+│   ├── blockchain/  # Contract interactions, RPC helpers
+│   ├── telemetry/   # Analytics, monitoring
+│   ├── skills/       # Skill runtime
+│   ├── ui/           # Shared UI components
+│   ├── shared/       # Shared utilities
+│   └── types/        # TypeScript type definitions
+├── src/             # Solidity smart contracts (Foundry)
+├── test/            # Foundry tests
+├── scripts/         # Deployment + compilation scripts
+├── infra/           # Docker + infrastructure scripts
 └── docs/
     ├── ARCHITECTURE.md
     ├── SCALAR_AGENT.md
@@ -145,7 +180,7 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 | 3 | AI Gateway, OpenRouter, Claude, GPT, Gemini, DeepSeek | Planned |
 | 4 | Base Integration, Wallet, Swap, NFT, Contracts, Treasury | Planned |
 | 5 | Marketplace, Skills, Plugins, Agent Registry | Planned |
-| 6 | Multi-Agent Runtime | Planned |
+| 6 | Multi-Agent Runtime (Commander, Developer, Trader, Researcher, Guardian) | Planned |
 | 7 | x402 Payments, Agent-to-Agent, Subscriptions, Streaming | In Progress |
 | 8 | Scalar Agent + OpenAPI/MCP integration | **Added** |
 | 9 | Policy-controlled Web3/trading execution | Planned |
@@ -155,9 +190,10 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 
 ## Links
 
-- **GitHub:** https://github.com/hakuramasam/orebot-network-contracts
+- **GitHub:** [github.com/hakuramasam/orebot-network-contracts](https://github.com/hakuramasam/orebot-network-contracts)
+- **Telegram:** [t.me/orebot_network](https://t.me/orebot_network)
 - **Chain:** Base Mainnet (chainId 8453)
-- **Scalar:** https://scalar.com/products/agent
+- **Scalar Agent:** [scalar.com/products/agent](https://scalar.com/products/agent)
 
 ---
 
