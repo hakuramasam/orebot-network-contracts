@@ -82,10 +82,22 @@ jobs:
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
 
+  secrets:
+    name: Secret scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan repository for leaked secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   readiness:
     name: Production readiness gate
     runs-on: ubuntu-latest
-    needs: [openapi, solidity, agent-sdk, gateway, root-dependencies]
+    needs: [openapi, solidity, agent-sdk, gateway, root-dependencies, secrets]
     steps:
       - name: Stage 1 passed
-        run: echo "OpenAPI, Solidity, SDK, gateway, and dependency checks passed."
+        run: echo "OpenAPI, Solidity, SDK, gateway, dependency, and secret checks passed."
