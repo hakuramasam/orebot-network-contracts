@@ -1,0 +1,59 @@
+name: Refresh dependency lockfiles
+
+on:
+  push:
+    branches: ['feat/scalar-agent-x402-gateway']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    name: Generate and validate npm lockfiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/scalar-agent-x402-gateway
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate Agent SDK lockfile
+        working-directory: packages/agent-sdk
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Generate gateway lockfile
+        working-directory: packages/x402-gateway
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Apply safe production dependency fixes
+        working-directory: packages/x402-gateway
+        run: npm audit fix --omit=dev --package-lock-only --ignore-scripts --no-audit --no-fund || true
+
+      - name: Validate clean npm ci installs
+        working-directory: packages/agent-sdk
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate clean gateway install
+        working-directory: packages/x402-gateway
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Show gateway production audit
+        working-directory: packages/x402-gateway
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Commit generated lockfiles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/agent-sdk/package-lock.json packages/x402-gateway/package-lock.json
+          if git diff --cached --quiet; then
+            echo "No lockfile changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(deps): generate production npm lockfiles"
+          git push origin HEAD:feat/scalar-agent-x402-gateway
