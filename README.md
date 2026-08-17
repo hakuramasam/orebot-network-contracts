@@ -60,6 +60,32 @@ User Wallet
 
 ---
 
+## Agent + API Architecture
+
+OREBOT separates the agent-facing protocol layer from economic and blockchain settlement:
+
+```text
+AI Mind / Agent
+      │ MCP / @scalar/agent
+      ▼
+Scalar Installation MCP
+      │ authenticated OpenAPI execution
+      ▼
+OREBOT x402 Gateway
+      ├── per-agent API keys + scopes
+      ├── rate limits
+      ├── OREBOT Credit ledger
+      ├── x402 USDC top-ups
+      ▼
+Base Mainnet CreditManager
+```
+
+Scalar converts the OpenAPI contract into a compact MCP surface with just-in-time operation discovery. The gateway remains authoritative for API identity, credits, payments and blockchain settlement.
+
+See [`docs/SCALAR_AGENT.md`](docs/SCALAR_AGENT.md) and [`docs/openapi/orebot-gateway.yaml`](docs/openapi/orebot-gateway.yaml).
+
+---
+
 ## OREBOT Agents
 
 | Agent | Role |
@@ -104,7 +130,8 @@ orebot-network-contracts/
 │   ├── api/          # API server (auth, credits, AI gateway)
 │   └── docs/         # Documentation site
 ├── packages/
-│   ├── agent-sdk/    # AI provider routing, agent definitions
+│   ├── agent-sdk/    # AI provider routing, agent definitions + Scalar adapters
+│   ├── x402-gateway/ # Agent API keys, credits, x402 + Base settlement
 │   ├── credit-engine/ # ORE→Credits conversion, billing
 │   ├── blockchain/  # Contract interactions, RPC helpers
 │   ├── telemetry/   # Analytics, monitoring
@@ -113,21 +140,28 @@ orebot-network-contracts/
 │   ├── shared/       # Shared utilities
 │   └── types/        # TypeScript type definitions
 ├── src/             # Solidity smart contracts (Foundry)
-│   ├── OREToken.sol
-│   ├── OREBOTRegistry.sol
-│   ├── CreditManager.sol
-│   ├── SkillRegistry.sol
-│   └── ...
 ├── test/            # Foundry tests
 ├── scripts/         # Deployment + compilation scripts
-├── infra/
-│   ├── docker/
-│   └── scripts/
-├── docs/
-│   └── ARCHITECTURE.md
-└── .github/
-    └── workflows/
+├── infra/           # Docker + infrastructure scripts
+└── docs/
+    ├── ARCHITECTURE.md
+    ├── SCALAR_AGENT.md
+    └── openapi/orebot-gateway.yaml
 ```
+
+---
+
+## Security Model
+
+- Scalar installations are scoped to selected OpenAPI operations.
+- OREBOT API keys are per-agent and stored hashed.
+- Production agents should use explicit scopes such as `agent:read`, `ai:execute`, and optional `credits:topup`.
+- `/admin/*` is never exposed through Scalar.
+- Trading, swaps, bridges and arbitrary wallet execution are not exposed by the current gateway.
+- x402 top-ups use idempotency keys to prevent replayed payments from double-crediting an agent.
+- On-chain credit settlement uses the Base `CreditManager` contract.
+
+For autonomous trading, add a separate policy/risk layer before enabling `trade:execute`.
 
 ---
 
@@ -147,10 +181,10 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 | 4 | Base Integration, Wallet, Swap, NFT, Contracts, Treasury | Planned |
 | 5 | Marketplace, Skills, Plugins, Agent Registry | Planned |
 | 6 | Multi-Agent Runtime (Commander, Developer, Trader, Researcher, Guardian) | Planned |
-| 7 | x402 Payments, Agent-to-Agent, Subscriptions, Streaming | Planned |
-| 8 | Public Beta | Planned |
-| 9 | DAO, Governance, Staking, Treasury | Planned |
-| 10 | Mainnet Launch | Planned |
+| 7 | x402 Payments, Agent-to-Agent, Subscriptions, Streaming | In Progress |
+| 8 | Scalar Agent + OpenAPI/MCP integration | **Added** |
+| 9 | Policy-controlled Web3/trading execution | Planned |
+| 10 | Public Beta / Mainnet expansion | Planned |
 
 ---
 
@@ -159,6 +193,7 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 - **GitHub:** [github.com/hakuramasam/orebot-network-contracts](https://github.com/hakuramasam/orebot-network-contracts)
 - **Telegram:** [t.me/orebot_network](https://t.me/orebot_network)
 - **Chain:** Base Mainnet (chainId 8453)
+- **Scalar Agent:** [scalar.com/products/agent](https://scalar.com/products/agent)
 
 ---
 

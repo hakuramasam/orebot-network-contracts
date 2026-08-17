@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: OREBOT Agent Gateway
+  version: 1.0.0
+  description: Agent-facing AI services and x402 OREBOT Credit billing on Base Mainnet.
+servers:
+  - url: https://api.orebot.network
+security:
+  - ApiKeyAuth: []
+paths:
+  /health:
+    get:
+      operationId: health
+      security: []
+      summary: Gateway health
+      responses:
+        '200': { description: OK }
+  /v1/services:
+    get:
+      operationId: listServices
+      summary: List available agent services
+      responses:
+        '200': { description: Service catalog }
+  /v1/balance:
+    get:
+      operationId: getAgentBalance
+      summary: Get OREBOT Credit balance
+      responses:
+        '200': { description: Agent balance }
+  /v1/chat:
+    post:
+      operationId: agentChat
+      summary: Execute basic AI chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PromptRequest' }
+      responses:
+        '200': { description: AI response }
+        '402': { $ref: '#/components/responses/InsufficientCredits' }
+  /v1/reason:
+    post:
+      operationId: agentReason
+      summary: Execute reasoning service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PromptRequest' }
+      responses:
+        '200': { description: AI response }
+        '402': { $ref: '#/components/responses/InsufficientCredits' }
+  /v1/research:
+    post:
+      operationId: agentResearch
+      summary: Execute research service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PromptRequest' }
+      responses:
+        '200': { description: Research response }
+        '402': { $ref: '#/components/responses/InsufficientCredits' }
+  /v1/code:
+    post:
+      operationId: agentCoding
+      summary: Execute coding service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PromptRequest' }
+      responses:
+        '200': { description: Coding response }
+        '402': { $ref: '#/components/responses/InsufficientCredits' }
+  /v1/credits/topup/preview:
+    get:
+      operationId: previewCreditTopups
+      summary: Preview x402 credit tiers
+      responses:
+        '200': { description: Credit tiers }
+  /v1/credits/topup/5:
+    post:
+      operationId: topupFive
+      summary: Buy 50 Credits for $5 via x402
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200': { description: Credits purchased }
+  /v1/credits/topup/20:
+    post:
+      operationId: topupTwenty
+      summary: Buy 200 Credits for $20 via x402
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200': { description: Credits purchased }
+  /v1/credits/topup/100:
+    post:
+      operationId: topupOneHundred
+      summary: Buy 1000 Credits for $100 via x402
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200': { description: Credits purchased }
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string }
+  schemas:
+    PromptRequest:
+      type: object
+      required: [prompt]
+      properties:
+        prompt: { type: string, minLength: 1 }
+        context: { type: object, additionalProperties: true }
+  responses:
+    InsufficientCredits:
+      description: Agent needs to top up OREBOT Credits.
