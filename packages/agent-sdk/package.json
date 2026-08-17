@@ -1,11 +1,14 @@
 {
   "name": "@orebot/agent-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@scalar/agent": "latest"
   },
   "devDependencies": {
     "typescript": "^5"
