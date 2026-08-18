@@ -1,6 +1,6 @@
 {
   "name": "@orebot-protocol/orebot-agent-gateway",
-  "version": "0.1.0",
+  "version": "0.2.0-beta",
   "description": "Agent-facing AI services and x402 OREBOT Credit billing on Base Mainnet.",
   "author": "OREBOT Agent Gateway",
   "repository": {
