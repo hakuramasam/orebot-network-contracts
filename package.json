@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Agent-facing AI services and x402 OREBOT Credit billing on Base Mainnet.",
   "author": "OREBOT Agent Gateway",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakuramasam/orebot-network-contracts.git"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/cjs/index.js",
