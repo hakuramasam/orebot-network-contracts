@@ -1,0 +1,334 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OREBOT Agent Gateway",
+    "version": "1.0.0",
+    "description": "Agent-facing AI services and x402 OREBOT Credit billing on Base Mainnet.",
+    "x-scalar-sdk-installation": [
+      {
+        "lang": "TypeScript",
+        "description": "```sh\nnpm install @orebot-protocol/orebot-agent-gateway\n```"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "https://api.orebot.network"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "security": [],
+        "summary": "Gateway health",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.health.list();"
+          }
+        ]
+      }
+    },
+    "/v1/services": {
+      "get": {
+        "operationId": "listServices",
+        "summary": "List available agent services",
+        "responses": {
+          "200": {
+            "description": "Service catalog"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.services.list();"
+          }
+        ]
+      }
+    },
+    "/v1/balance": {
+      "get": {
+        "operationId": "getAgentBalance",
+        "summary": "Get OREBOT Credit balance",
+        "responses": {
+          "200": {
+            "description": "Agent balance"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.balance.listAgent();"
+          }
+        ]
+      }
+    },
+    "/v1/chat": {
+      "post": {
+        "operationId": "agentChat",
+        "summary": "Execute basic AI chat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AI response"
+          },
+          "402": {
+            "$ref": "#/components/responses/InsufficientCredits"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.chat.agent({\n  prompt: 'x',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/reason": {
+      "post": {
+        "operationId": "agentReason",
+        "summary": "Execute reasoning service",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AI response"
+          },
+          "402": {
+            "$ref": "#/components/responses/InsufficientCredits"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.reason.agent({\n  prompt: 'x',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/research": {
+      "post": {
+        "operationId": "agentResearch",
+        "summary": "Execute research service",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Research response"
+          },
+          "402": {
+            "$ref": "#/components/responses/InsufficientCredits"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.research.agent({\n  prompt: 'x',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/code": {
+      "post": {
+        "operationId": "agentCoding",
+        "summary": "Execute coding service",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Coding response"
+          },
+          "402": {
+            "$ref": "#/components/responses/InsufficientCredits"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.code.agentCoding({\n  prompt: 'x',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/credits/topup/preview": {
+      "get": {
+        "operationId": "previewCreditTopups",
+        "summary": "Preview x402 credit tiers",
+        "responses": {
+          "200": {
+            "description": "Credit tiers"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.credits.topup.preview();"
+          }
+        ]
+      }
+    },
+    "/v1/credits/topup/5": {
+      "post": {
+        "operationId": "topupFive",
+        "summary": "Buy 50 Credits for $5 via x402",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credits purchased"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.credits.topup.five({\n  'Idempotency-Key': 'idempotencyKey',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/credits/topup/20": {
+      "post": {
+        "operationId": "topupTwenty",
+        "summary": "Buy 200 Credits for $20 via x402",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credits purchased"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.credits.topup.twenty({\n  'Idempotency-Key': 'idempotencyKey',\n});"
+          }
+        ]
+      }
+    },
+    "/v1/credits/topup/100": {
+      "post": {
+        "operationId": "topupOneHundred",
+        "summary": "Buy 1000 Credits for $100 via x402",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credits purchased"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "TypeScript",
+            "label": "TypeScript",
+            "source": "import OrebotAgentGateway from '@orebot-protocol/orebot-agent-gateway';\n\nconst client = new OrebotAgentGateway({\n  apiKeyAuth: process.env['API_KEY_AUTH'], // defaults to the API_KEY_AUTH env var\n});\n\nawait client.credits.topup.oneHundred({\n  'Idempotency-Key': 'idempotencyKey',\n});"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "parameters": {
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "PromptRequest": {
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "context": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "responses": {
+      "InsufficientCredits": {
+        "description": "Agent needs to top up OREBOT Credits."
+      }
+    }
+  }
+}

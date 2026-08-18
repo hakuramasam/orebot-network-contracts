@@ -1,0 +1,598 @@
+{
+  "name": "OrebotAgentGateway",
+  "slug": "orebotAgentGateway",
+  "generatorVersion": "0.27.0",
+  "servers": [
+    "https://api.orebot.network"
+  ],
+  "environments": {
+    "production": "https://api.orebot.network"
+  },
+  "environmentOrder": [
+    "production"
+  ],
+  "auth": [
+    "apiKey"
+  ],
+  "authDetails": [
+    {
+      "kind": "apiKey",
+      "id": "ApiKeyAuth",
+      "in": "header",
+      "paramName": "X-API-Key"
+    }
+  ],
+  "clientHeaderParams": [],
+  "schemas": [
+    {
+      "name": "prompt_request",
+      "source": "prompt_request",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "prompt",
+            "publicName": "prompt",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "validation": {
+                "minLength": 1
+              }
+            }
+          },
+          {
+            "name": "context",
+            "publicName": "context",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "object",
+              "properties": [],
+              "additionalProperties": {
+                "kind": "unknown"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "resources": [
+    "health",
+    "services",
+    "balance",
+    "chat",
+    "reason",
+    "research",
+    "code",
+    "credits",
+    "credits.topup"
+  ],
+  "publicResources": [
+    "health",
+    "services",
+    "balance",
+    "chat",
+    "reason",
+    "research",
+    "code",
+    "credits",
+    "credits.topup"
+  ],
+  "operations": [
+    {
+      "resource": "health",
+      "publicResource": "health",
+      "operation": "list",
+      "publicOperation": "list",
+      "deprecated": false,
+      "method": "GET",
+      "path": "/health",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "services",
+      "publicResource": "services",
+      "operation": "list",
+      "publicOperation": "list",
+      "deprecated": false,
+      "method": "GET",
+      "path": "/v1/services",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "balance",
+      "publicResource": "balance",
+      "operation": "listAgent",
+      "publicOperation": "listAgent",
+      "deprecated": false,
+      "method": "GET",
+      "path": "/v1/balance",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "chat",
+      "publicResource": "chat",
+      "operation": "agent",
+      "publicOperation": "agent",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/chat",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "prompt",
+        "context"
+      ],
+      "publicBodyParams": [
+        "prompt",
+        "context"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "prompt",
+          "required": true
+        },
+        {
+          "name": "context",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "ChatAgentParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "402"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "402",
+          "contents": []
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "reason",
+      "publicResource": "reason",
+      "operation": "agent",
+      "publicOperation": "agent",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/reason",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "prompt",
+        "context"
+      ],
+      "publicBodyParams": [
+        "prompt",
+        "context"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "prompt",
+          "required": true
+        },
+        {
+          "name": "context",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "ReasonAgentParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "402"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "402",
+          "contents": []
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "research",
+      "publicResource": "research",
+      "operation": "agent",
+      "publicOperation": "agent",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/research",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "prompt",
+        "context"
+      ],
+      "publicBodyParams": [
+        "prompt",
+        "context"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "prompt",
+          "required": true
+        },
+        {
+          "name": "context",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "ResearchAgentParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "402"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "402",
+          "contents": []
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "code",
+      "publicResource": "code",
+      "operation": "agentCoding",
+      "publicOperation": "agentCoding",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/code",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "prompt",
+        "context"
+      ],
+      "publicBodyParams": [
+        "prompt",
+        "context"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "prompt",
+          "required": true
+        },
+        {
+          "name": "context",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "CodeAgentCodingParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "402"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "402",
+          "contents": []
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "credits.topup",
+      "publicResource": "credits.topup",
+      "operation": "preview",
+      "publicOperation": "preview",
+      "deprecated": false,
+      "method": "GET",
+      "path": "/v1/credits/topup/preview",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "credits.topup",
+      "publicResource": "credits.topup",
+      "operation": "five",
+      "publicOperation": "five",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/credits/topup/5",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [
+        "Idempotency-Key"
+      ],
+      "publicHeaderParams": [
+        "Idempotency-Key"
+      ],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [
+        {
+          "name": "Idempotency-Key",
+          "required": true,
+          "style": "form",
+          "explode": true
+        }
+      ],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "TopupFiveParams"
+      },
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "credits.topup",
+      "publicResource": "credits.topup",
+      "operation": "twenty",
+      "publicOperation": "twenty",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/credits/topup/20",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [
+        "Idempotency-Key"
+      ],
+      "publicHeaderParams": [
+        "Idempotency-Key"
+      ],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [
+        {
+          "name": "Idempotency-Key",
+          "required": true,
+          "style": "form",
+          "explode": true
+        }
+      ],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "TopupTwentyParams"
+      },
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "credits.topup",
+      "publicResource": "credits.topup",
+      "operation": "oneHundred",
+      "publicOperation": "oneHundred",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v1/credits/topup/100",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [
+        "Idempotency-Key"
+      ],
+      "publicHeaderParams": [
+        "Idempotency-Key"
+      ],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [
+        {
+          "name": "Idempotency-Key",
+          "required": true,
+          "style": "form",
+          "explode": true
+        }
+      ],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "TopupOneHundredParams"
+      },
+      "errorResponses": [],
+      "responseLinks": [],
+      "transport": "http"
+    }
+  ],
+  "webhooks": []
+}
