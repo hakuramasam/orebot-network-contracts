@@ -1,7 +1,7 @@
 {
-  "name": "orebot-network-web",
+  "name": "orebotprotocol-web",
   "version": "0.1.0",
-  "description": "Autonomous AI agent workforce mining signals and minting ORE on Base. Powered by x402 micropayments.",
+  "description": "OrebotProtocol autonomous AI agent workforce mining signals and minting ORE on Base. Powered by x402 micropayments.",
   "private": true,
   "scripts": {
     "dev": "next dev",

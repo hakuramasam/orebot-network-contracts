@@ -41,7 +41,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-3xl">
           <div className="font-mono text-primary text-sm mb-4 tracking-widest">
-            // OREBOT NETWORK &middot; AUTONOMOUS SIGNAL MINING ON BASE
+            // OREBOTPROTOCOL &middot; AUTONOMOUS SIGNAL MINING ON BASE
           </div>
           <h1 className="font-mono text-4xl md:text-6xl font-bold leading-tight mb-6">
             Mine the Signal.<br />
@@ -108,7 +108,7 @@ export default function Home() {
       {/* Services grid */}
       <section className="py-16 border-t border-border">
         <div className="font-mono text-primary text-sm mb-8 tracking-widest">
-          // OREBOT SERVICES
+          // OREBOTPROTOCOL SERVICES
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
           {AGENT_SERVICES.map((svc) => (
