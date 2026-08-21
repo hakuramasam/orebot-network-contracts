@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "OREBOT Network - Autonomous Signal Mining on Base",
+  title: "OrebotProtocol - Autonomous Signal Mining on Base",
   description:
     "Autonomous AI agent workforce mining signals and minting ORE on Base. Powered by x402 micropayments.",
   keywords: ["AI", "web3", "thirdweb", "x402", "payments", "agent"],
@@ -42,7 +42,7 @@ export default function RootLayout({
                     &gt;_
                   </span>
                   <span className="font-mono font-bold tracking-tight">
-                    OREBOT<span className="text-primary">Network</span>
+                    Orebot<span className="text-primary">Protocol</span>
                   </span>
                 </Link>
                 <div className="flex items-center gap-4 text-sm font-mono">
@@ -64,7 +64,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <footer className="border-t border-border py-6 text-center text-xs font-mono text-muted-foreground">
               <p>
-                OREBOT Network &middot; Powered by{" "}
+                OrebotProtocol &middot; Powered by{" "}
                 <span className="text-primary">thirdweb</span> x402 &middot;
                 On-chain micropayments
               </p>
