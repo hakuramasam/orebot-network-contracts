@@ -199,4 +199,9 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Hakurama Sam (OREBOT Network).
+
+- [AUTHORS.md](AUTHORS.md) — who built this and why the copyright line names a person
+- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) — OpenZeppelin, Foundry, Slither, protocol interfaces, and audited third-party projects, none of which are ours
+
+The MIT grant covers source code. It does not cover the OREBOT name, marks, or the deployed contract addresses on Base Mainnet, which remain controlled by the OREBOT Safe multisig regardless of forks.
