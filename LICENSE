@@ -19,23 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## Scope of this license
-
-This license covers the original source code in this repository: the OREBOT
-Network contracts in `contracts/` and the application and package code in
-`apps/` and `packages/`, to the extent each was authored for this project.
-
-It does **not** cover third-party components. Those retain their own licenses
-and are enumerated in `THIRD_PARTY_NOTICES.md`. Files that carry a different
-`SPDX-License-Identifier` header are governed by the header they declare.
-
-## Note on the name and marks
-
-The MIT grant above covers code. It does not grant rights to the OREBOT
-Network name, the ORE logo, or the deployed token contracts' branding, and it
-does not imply endorsement of any derivative. Deployed contract addresses on
-Base Mainnet remain controlled by the OREBOT Safe multisig regardless of who
-forks this code.

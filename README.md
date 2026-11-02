@@ -201,6 +201,7 @@ OpenRouter · OpenAI · Claude · Gemini · DeepSeek · Mistral · Ollama
 
 MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Hakurama Sam (OREBOT Network).
 
+- [NOTICE.md](NOTICE.md) — scope of the grant, brand marks, and what the license does not cover
 - [AUTHORS.md](AUTHORS.md) — who built this and why the copyright line names a person
 - [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) — OpenZeppelin, Foundry, Slither, protocol interfaces, and audited third-party projects, none of which are ours
 
