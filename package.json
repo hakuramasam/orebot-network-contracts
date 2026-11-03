@@ -5,5 +5,9 @@
   "dependencies": {
     "ethers": "^6.17.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "overrides": {
+    "follow-redirects": "1.16.2",
+    "tmp": "0.2.7"
+  }
 }
